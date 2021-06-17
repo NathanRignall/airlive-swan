@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 
 import { classNames } from "components/utility";
 
-enum Variant {
+enum Colour {
     LOGOLIGHT,
     LOGOMAIN,
     LOGODARK,
@@ -25,11 +25,17 @@ enum Display {
     BLOCK,
 }
 
+enum Element {
+    DIV,
+    SUBMIT,
+}
+
 type Props = {
-    variant: Variant;
     children?: ReactNode;
+    colour: Colour;
     size: Size;
     display: Display;
+    element: Element;
 };
 
 const SIZE_MAPS: Record<Size, string> = {
@@ -38,16 +44,16 @@ const SIZE_MAPS: Record<Size, string> = {
     [Size.LARGE]: "px-4 py-2 text-2xl",
 };
 
-const VARIANT_MAPS: Record<Variant, string> = {
-    [Variant.LOGOLIGHT]: "bg-logo-light text-white hover:bg-logo-light-light hover:text-gray-700",
-    [Variant.LOGOMAIN]: "bg-logo-main text-white hover:bg-logo-main-light hover:text-gray-700",
-    [Variant.LOGODARK]: "bg-logo-dark text-white hover:bg-logo-dark-light hover:text-gray-700",
-    [Variant.LIGHT]: "bg-gray-200 text-black",
-    [Variant.DARK]: "bg-gray-700 text-white",
-    [Variant.RED]: "bg-red-500 text-white",
-    [Variant.YELLOW]: "bg-yellow-500 text-black",
-    [Variant.GREEN]: "bg-green-500 text-white",
-    [Variant.BLUE]: "bg-blue-500 text-white",
+const COLOUR_MAPS: Record<Colour, string> = {
+    [Colour.LOGOLIGHT]: "bg-logo-light text-white hover:bg-logo-light-light hover:text-gray-700",
+    [Colour.LOGOMAIN]: "bg-logo-main text-white hover:bg-logo-main-light hover:text-gray-700",
+    [Colour.LOGODARK]: "bg-logo-dark text-white hover:bg-logo-dark-light hover:text-gray-700",
+    [Colour.LIGHT]: "bg-gray-200 text-black",
+    [Colour.DARK]: "bg-gray-700 text-white",
+    [Colour.RED]: "bg-red-500 text-white",
+    [Colour.YELLOW]: "bg-yellow-500 text-black",
+    [Colour.GREEN]: "bg-green-500 text-white",
+    [Colour.BLUE]: "bg-blue-500 text-white",
 };
 
 const DISPLAY_MAPS: Record<Display, string> = {
@@ -56,27 +62,46 @@ const DISPLAY_MAPS: Record<Display, string> = {
 };
 
 export function Button(props: Props) {
-    const { children, variant, size, display } = props;
-    return (
-        <div
-            className={classNames(
-                "rounded-md mb-2 cursor-pointer",
-                VARIANT_MAPS[variant],
-                SIZE_MAPS[size],
-                DISPLAY_MAPS[display]
-            )}
-        >
-            {children}
-        </div>
-    );
+    const { children, colour, size, display, element } = props;
+
+    if (element == Element.DIV) {
+        return (
+            <div
+                className={classNames(
+                    "rounded-md mb-2 cursor-pointer",
+                    COLOUR_MAPS[colour],
+                    SIZE_MAPS[size],
+                    DISPLAY_MAPS[display]
+                )}
+            >
+                {children}
+            </div>
+        );
+    } else {
+        return (
+            <button
+                className={classNames(
+                    "rounded-md mb-2 cursor-pointer",
+                    COLOUR_MAPS[colour],
+                    SIZE_MAPS[size],
+                    DISPLAY_MAPS[display]
+                )}
+                type="submit"
+            >
+                {children}
+            </button>
+        );
+    }
 }
 
 Button.defaultProps = {
-    variant: Variant.LOGOMAIN,
+    colour: Colour.LOGOMAIN,
     size: Size.MEDIUM,
     display: Display.INLINE,
+    element: Element.DIV,
 };
 
-Button.variant = Variant;
+Button.colour = Colour;
 Button.size = Size;
 Button.display = Display;
+Button.element = Element;

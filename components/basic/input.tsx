@@ -12,6 +12,7 @@ type Props = {
     children?: ReactNode;
     className?: string;
     placement: Placement;
+    [x: string]: any;
 };
 
 const PLACEMENT_MAPS: Record<Placement, string> = {
