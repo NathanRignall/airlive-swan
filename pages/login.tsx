@@ -3,6 +3,7 @@ import Header from "components/parts/header";
 import { useForm } from "react-hook-form";
 
 import { Button, Card, Input } from "components/basic";
+import { useFlamePostCall } from "components/api";
 
 type LoginFormType = {
     email: string;
@@ -18,7 +19,18 @@ function LoginForm() {
 
     const onSubmit = (data: LoginFormType) => {
         console.log("data", data);
+        loginRequest(
+            {
+                email: data.email,
+                password: data.password,
+            },
+            function () {
+                console.log("Done");
+            }
+        );
     };
+
+    const [loginStatus, loginRequest] = useFlamePostCall("/account/user/login");
 
     return (
         <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
@@ -52,13 +64,13 @@ function LoginForm() {
                 </div>
             </div>
 
-            {errors.email && errors.email.type === "required" && (
-                <div className="error">Your must enter your email.</div>
-            )}
-
             <Button display={Button.display.BLOCK} element={Button.element.SUBMIT}>
                 Login
             </Button>
+
+            {errors.email && errors.email.type === "required" && <div>Your must enter your email.</div>}
+
+            {loginStatus.show && <div>{loginStatus.message}</div>}
         </form>
     );
 }

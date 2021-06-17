@@ -1,10 +1,30 @@
 import axios from "axios";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
-export function useFlamePostCall(url: string): [object, (json: object, callback: () => void) => void] {
+export const fetcher = async (url: string) => {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+        const error = {
+            info: await res,
+            status: res.status,
+        };
+        throw error;
+    }
+
+    return res.json();
+};
+
+interface ServerStateType {
+    show: boolean;
+    error: boolean;
+    message: string;
+}
+
+export function useFlamePostCall(url: string): [ServerStateType, (json: object, callback: () => void) => void] {
     // satus of the hook from requests
-    const [serverState, setServerState] = useState<object>({
+    const [serverState, setServerState] = useState<ServerStateType>({
         show: false,
         error: false,
         message: "none",
