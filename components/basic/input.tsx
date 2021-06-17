@@ -15,9 +15,9 @@ type Props = {
 };
 
 const PLACEMENT_MAPS: Record<Placement, string> = {
-    [Placement.TOP]: "rounded-t-md",
-    [Placement.MIDDLE]: "rounded-none",
-    [Placement.BOTTOM]: "rounded-b-md ",
+    [Placement.TOP]: "rounded-t-md border-b-0 focus:ring-b-0",
+    [Placement.MIDDLE]: "rounded-none border-x-0",
+    [Placement.BOTTOM]: "rounded-b-md border-t-0 focus:ring-t-0",
 };
 
 export function Input(props: Props) {
@@ -25,7 +25,7 @@ export function Input(props: Props) {
     return (
         <input
             className={classNames(
-                "text-lg block w-full px-3 py-2 rounded-none border text-gray-700 border-gray-300 placeholder-gray-500  dark:bg-gray-600 dark:text-gray-200 dark:border-gray-900 dark:placeholder-gray-300 focus:outline-none focus:ring-2 focus:border-transparent focus:z-10 focus:ring-logo-light",
+                "text-lg block w-full px-3 py-2 rounded-none outline-none text-gray-700 border-logo-light-light border-2 placeholder-gray-500  dark:bg-gray-600 dark:text-gray-200 dark:border-logo-light dark:placeholder-gray-300 ",
                 PLACEMENT_MAPS[placement],
                 className
             )}
