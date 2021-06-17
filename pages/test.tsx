@@ -10,7 +10,6 @@ export default function Home() {
             </Head>
 
             <Button size={Button.size.LARGE}>Button</Button>
-            <Button variant={Button.variant.BLUE}>Button</Button>
             <Button size={Button.size.SMALL}>Button</Button>
 
             <Card>Test Card here for testing perpouses</Card>
