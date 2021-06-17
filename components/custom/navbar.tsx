@@ -23,7 +23,7 @@ type Props = {
 
 const ACTIVE_MAPS: Record<Active, string> = {
     [Active.NOTACTIVE]:
-        "bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-white dark:bg-gray-600 dark:text-white dark:hover:bg-white dark:hover:text-gray-700",
+        "bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-white dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-white dark:hover:text-gray-700",
     [Active.ACTIVE]: "bg-gray-700 text-white",
 };
 
