@@ -1,9 +1,12 @@
-import Header from "components/parts/header";
+import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 
+import Header from "components/parts/header";
+
 import { Button, Card, Input } from "components/basic";
 import { useFlamePostCall } from "components/api";
+import { Router } from "next/dist/client/router";
 
 type LoginFormType = {
     email: string;
@@ -11,6 +14,14 @@ type LoginFormType = {
 };
 
 function LoginForm() {
+    const router = useRouter();
+
+    var { url } = router.query;
+
+    if (url == undefined) {
+        url = "/watch";
+    }
+
     const {
         register,
         handleSubmit,
@@ -25,7 +36,7 @@ function LoginForm() {
                 password: data.password,
             },
             function () {
-                console.log("Done");
+                window.location.replace(url);
             }
         );
     };

@@ -32,6 +32,7 @@ enum Element {
 
 type Props = {
     children?: ReactNode;
+    className?: string;
     colour: Colour;
     size: Size;
     display: Display;
@@ -45,8 +46,8 @@ const SIZE_MAPS: Record<Size, string> = {
 };
 
 const COLOUR_MAPS: Record<Colour, string> = {
-    [Colour.LOGOLIGHT]: "bg-logo-light text-white hover:bg-logo-light-light hover:text-gray-700",
-    [Colour.LOGOMAIN]: "bg-logo-main text-white hover:bg-logo-main-light hover:text-gray-700",
+    [Colour.LOGOLIGHT]: "bg-logo-light text-white hover:bg-logo-light-dark",
+    [Colour.LOGOMAIN]: "bg-logo-main text-white hover:bg-logo-main-dark",
     [Colour.LOGODARK]: "bg-logo-dark text-white hover:bg-logo-dark-light hover:text-gray-700",
     [Colour.LIGHT]: "bg-gray-200 text-black",
     [Colour.DARK]: "bg-gray-700 text-white",
@@ -62,7 +63,7 @@ const DISPLAY_MAPS: Record<Display, string> = {
 };
 
 export function Button(props: Props) {
-    const { children, colour, size, display, element } = props;
+    const { children, className, colour, size, display, element } = props;
 
     if (element == Element.DIV) {
         return (
@@ -71,7 +72,8 @@ export function Button(props: Props) {
                     "rounded-md mb-2 cursor-pointer",
                     COLOUR_MAPS[colour],
                     SIZE_MAPS[size],
-                    DISPLAY_MAPS[display]
+                    DISPLAY_MAPS[display],
+                    className
                 )}
             >
                 {children}
@@ -84,7 +86,8 @@ export function Button(props: Props) {
                     "rounded-md mb-2 cursor-pointer",
                     COLOUR_MAPS[colour],
                     SIZE_MAPS[size],
-                    DISPLAY_MAPS[display]
+                    DISPLAY_MAPS[display],
+                    className
                 )}
                 type="submit"
             >
