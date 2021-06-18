@@ -3,9 +3,8 @@ import React, { ReactNode } from "react";
 import { classNames } from "components/utility";
 
 enum Colour {
-    LOGOLIGHT,
+    LOGOALT,
     LOGOMAIN,
-    LOGODARK,
     LIGHT,
     DARK,
     RED,
@@ -46,9 +45,9 @@ const SIZE_MAPS: Record<Size, string> = {
 };
 
 const COLOUR_MAPS: Record<Colour, string> = {
-    [Colour.LOGOLIGHT]: "bg-logo-light text-white hover:bg-logo-light-dark",
+    [Colour.LOGOALT]:
+        "bg-logo-light text-white hover:bg-logo-light-dark dark:bg-logo-dark-dark dark:text-gray-200 dark:hover:bg-logo-dark-light dark:hover:text-gray-700",
     [Colour.LOGOMAIN]: "bg-logo-main text-white hover:bg-logo-main-dark",
-    [Colour.LOGODARK]: "bg-logo-dark text-white hover:bg-logo-dark-light hover:text-gray-700",
     [Colour.LIGHT]: "bg-gray-200 text-black",
     [Colour.DARK]: "bg-gray-700 text-white",
     [Colour.RED]: "bg-red-500 text-white",

@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { useAuth } from "components/context/auth";
 
@@ -17,11 +17,18 @@ type Props = {
 export default function Layout(props: Props) {
     const { children, title } = props;
 
+    const router = useRouter();
+
     const { loggedIn, login, logout } = useAuth();
 
-    useEffect(() => {
-        console.log(loggedIn);
-    }, [loggedIn]);
+    const handleClick = (event) => {
+        event.preventDefault();
+
+        router.push({
+            pathname: "/login",
+            query: { url: window.location.pathname },
+        });
+    };
 
     return (
         <>
@@ -33,28 +40,22 @@ export default function Layout(props: Props) {
             </div>
 
             {loggedIn ? (
-                "overflow-y-hidden fixed w-full h-full"
+                ""
             ) : (
                 <Overlay>
                     <div>
                         <div>You need to login to AirLive to proceed</div>
-                        <Link
-                            href={{
-                                pathname: "/login",
-                                query: { url: window.location.pathname },
-                            }}
-                        >
-                            <a>
-                                <Button
-                                    className="mt-5"
-                                    colour={Button.colour.LOGOLIGHT}
-                                    size={Button.size.LARGE}
-                                    display={Button.display.BLOCK}
-                                >
-                                    Login
-                                </Button>
-                            </a>
-                        </Link>
+
+                        <a onClick={handleClick}>
+                            <Button
+                                className="mt-5"
+                                colour={Button.colour.LOGOALT}
+                                size={Button.size.LARGE}
+                                display={Button.display.BLOCK}
+                            >
+                                Login
+                            </Button>
+                        </a>
                     </div>
                 </Overlay>
             )}

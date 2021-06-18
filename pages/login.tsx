@@ -15,7 +15,6 @@ type LoginFormType = {
 
 function LoginForm() {
     const router = useRouter();
-
     var { url } = router.query;
 
     if (url == undefined) {
@@ -36,7 +35,7 @@ function LoginForm() {
                 password: data.password,
             },
             function () {
-                window.location.replace(url);
+                window.location.replace("/");
             }
         );
     };

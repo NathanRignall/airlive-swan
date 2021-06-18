@@ -31,7 +31,7 @@ export function useFlameAuth(url: string): [boolean, boolean, object, object] {
 
     // set the state based on issues
     const loading = !data && !error;
-    const loggedOut = error && error.status === 401;
+    const loggedOut = error && error.status === 401 ? true : false;
 
     // auth hook
     const { loggedIn, login, logout } = useAuth();
