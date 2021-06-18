@@ -1,10 +1,13 @@
 import Link from "next/link";
 
+import { useAuth } from "components/context/auth";
 import { useToggle } from "components/utility";
 
 import { NavbarLink } from "components/custom/navbar";
 
 export default function Navbar() {
+    const { loggedIn, login, logout } = useAuth();
+
     const [menu, toggleMenu] = useToggle(false);
 
     return (
@@ -62,7 +65,12 @@ export default function Navbar() {
                                 <NavbarLink link="/" name="Home"></NavbarLink>
                                 <NavbarLink link="/watch" name="Watch"></NavbarLink>
                                 <NavbarLink link="/tickets" name="Tickets"></NavbarLink>
-                                <NavbarLink link="/account" name="Account"></NavbarLink>
+
+                                {loggedIn ? (
+                                    <NavbarLink link="/account" name="Account"></NavbarLink>
+                                ) : (
+                                    <NavbarLink link="/login" name="Login" active={NavbarLink.active.BOLD}></NavbarLink>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -75,7 +83,17 @@ export default function Navbar() {
                         <NavbarLink link="/" name="Home" size={NavbarLink.size.MOBILE}></NavbarLink>
                         <NavbarLink link="/watch" name="Watch" size={NavbarLink.size.MOBILE}></NavbarLink>
                         <NavbarLink link="/tickets" name="Tickets" size={NavbarLink.size.MOBILE}></NavbarLink>
-                        <NavbarLink link="/account" name="Account" size={NavbarLink.size.MOBILE}></NavbarLink>
+
+                        {loggedIn ? (
+                            <NavbarLink link="/account" name="Account" size={NavbarLink.size.MOBILE}></NavbarLink>
+                        ) : (
+                            <NavbarLink
+                                link="/login"
+                                name="Login"
+                                active={NavbarLink.active.BOLD}
+                                size={NavbarLink.size.MOBILE}
+                            ></NavbarLink>
+                        )}
                     </div>
                 </div>
             ) : null}

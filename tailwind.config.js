@@ -11,7 +11,7 @@ module.exports = {
                 logo: {
                     light: { DEFAULT: "#30CFD0", light: "#82e3e3", dark: "#1c7d7d" },
                     main: { DEFAULT: "#4A729D", light: "#97b2ce", dark: "#314c68" },
-                    dark: { DEFAULT: "#330867", light: "#c8a0f8", dark: "#330867" },
+                    dark: { DEFAULT: "#330867", light: "#c8a0f8", dark: "#6910d5" },
                 },
             },
         },

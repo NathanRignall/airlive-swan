@@ -7,6 +7,7 @@ import { classNames } from "components/utility";
 enum Active {
     NOTACTIVE,
     ACTIVE,
+    BOLD,
 }
 
 enum Size {
@@ -24,7 +25,9 @@ type Props = {
 const ACTIVE_MAPS: Record<Active, string> = {
     [Active.NOTACTIVE]:
         "bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-white dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-white dark:hover:text-gray-700",
-    [Active.ACTIVE]: "bg-gray-700 text-white",
+    [Active.ACTIVE]: "bg-gray-700 text-white dark:bg-white dark:text-gray-700",
+    [Active.BOLD]:
+        "bg-logo-light text-white hover:bg-logo-light-dark hover:text-white dark:bg-logo-dark-dark dark:text-gray-200 dark:hover:bg-logo-dark-light dark:hover:text-gray-700",
 };
 
 const SIZE_MAPS: Record<Size, string> = {

@@ -1,42 +1,50 @@
 import React, { useState, createContext, useContext, ReactNode } from "react";
 
-// context
+// context type
 type authContextType = {
-    state: boolean;
+    loggedIn: boolean;
     login: () => void;
     logout: () => void;
 };
 
+// default vlaues for the context
 const authContextDefaultValues = {
-    state: null,
+    loggedIn: false,
     login: () => {},
     logout: () => {},
 };
 
+// create the context to be used
 const AuthContext = createContext<authContextType>(authContextDefaultValues);
 
+// export use context
 export function useAuth() {
     return useContext(AuthContext);
 }
 
-// provider
+// provider props
 type Props = {
     children: ReactNode;
 };
 
+// export the provider
 export function AuthProvider({ children }: Props) {
-    const [state, setState] = useState<boolean>(null);
+    // state for context
+    const [loggedIn, setloggedIn] = useState<boolean>(false);
 
+    // fucntion to set login
     const login = () => {
-        setState(true);
+        setloggedIn(true);
     };
 
+    // function to set logout
     const logout = () => {
-        setState(false);
+        setloggedIn(false);
     };
 
+    // create valyue object to be returned
     const value = {
-        state,
+        loggedIn,
         login,
         logout,
     };

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import Link from "next/link";
 
 import { useAuth } from "components/context/auth";
@@ -12,7 +12,6 @@ type Props = {
 };
 
 export function LoginMessage(props) {
-    var url = "/login";
     return (
         <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-center justify-center min-h-screen pt-5 px-5 sm:p-0">
@@ -23,7 +22,7 @@ export function LoginMessage(props) {
                     <div className="bg-white px-4 py-14 sm:px-16 sm:py-16">
                         <div className="text-center text-2xl">{props.children}</div>
                         <div className="mt-2">
-                            <div className="inline-flex items-center w-full flex justify-center py-2 px-4 text-lg font-medium rounded-md text-white bg-logo3 hover:bg-logo1 cursor-pointer">
+                            <div className="items-center w-full flex justify-center py-2 px-4 text-lg font-medium rounded-md text-white bg-logo3 hover:bg-logo1 cursor-pointer">
                                 Login
                             </div>
                         </div>
@@ -37,7 +36,11 @@ export function LoginMessage(props) {
 export default function Layout(props: Props) {
     const { children, title } = props;
 
-    const { state, login, logout } = useAuth();
+    const { loggedIn, login, logout } = useAuth();
+
+    useEffect(() => {
+        console.log(loggedIn);
+    }, [loggedIn]);
 
     return (
         <>
@@ -48,7 +51,7 @@ export default function Layout(props: Props) {
                 <div className="container mx-auto px-4 md:px-10 pt-24 flex-grow">{children}</div>
             </div>
 
-            {state ? "logged in" : <LoginMessage />}
+            {loggedIn ? "no" : <LoginMessage />}
         </>
     );
 }
