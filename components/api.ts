@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
+import Router from "next/router";
 import axios from "axios";
+import useSWR from "swr";
 
-import { useState } from "react";
+import { useAuth } from "components/context/auth";
 
 export const fetcher = async (url: string) => {
     const res = await fetch(url);
@@ -15,6 +18,25 @@ export const fetcher = async (url: string) => {
 
     return res.json();
 };
+
+export function useFlameAuth(url: string): [boolean, boolean, object, object] {
+    const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_FLAME}${url}`, fetcher);
+
+    const loading = !data && !error;
+    const loggedOut = error && error.status === 401;
+
+    const { state, login, logout } = useAuth();
+
+    useEffect(() => {
+        if (loggedOut) {
+            logout();
+        } else {
+            login();
+        }
+    }, [loggedOut]);
+
+    return [loading, loggedOut, data, error];
+}
 
 interface flameGetServerStateType {
     show: boolean;

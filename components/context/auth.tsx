@@ -1,25 +1,14 @@
 import React, { useState, createContext, useContext, ReactNode } from "react";
 
-// auth details type
-type authDetailsType = {
-    session: boolean;
-    userID: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-};
-
-const authDetailsDefaultValues = { session: false, userID: null, firstName: null, lastName: null, email: null };
-
 // context
 type authContextType = {
-    details: authDetailsType;
-    login: (details: authDetailsType) => void;
+    state: boolean;
+    login: () => void;
     logout: () => void;
 };
 
 const authContextDefaultValues = {
-    details: authDetailsDefaultValues,
+    state: null,
     login: () => {},
     logout: () => {},
 };
@@ -36,18 +25,18 @@ type Props = {
 };
 
 export function AuthProvider({ children }: Props) {
-    const [details, setDetails] = useState<authDetailsType>(authDetailsDefaultValues);
+    const [state, setState] = useState<boolean>(null);
 
-    const login = (details: authDetailsType) => {
-        setDetails(details);
+    const login = () => {
+        setState(true);
     };
 
     const logout = () => {
-        setDetails(authDetailsDefaultValues);
+        setState(false);
     };
 
     const value = {
-        details,
+        state,
         login,
         logout,
     };
