@@ -1,4 +1,4 @@
-# Airlive Swan c#
+# Airlive Swan
 
 This is the user interface for Airlive
 
